@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomManager : SingletonBehaviour<RoomManager>
 {
     [SerializeField] private Room CurrentRoom;
 
