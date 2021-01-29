@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    public Room CurrentRoom;
+    [SerializeField] private Room CurrentRoom;
 
-    public List<Room> Rooms;
+    [SerializeField] private List<Room> Rooms;
 
-    public void Start()
+    private void Start()
     {
         foreach (var room in Rooms)
         {

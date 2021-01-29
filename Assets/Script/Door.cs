@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public RoomManager RoomManager;
+    [SerializeField] private RoomManager RoomManager;
 
-    public Room Room;
+    [SerializeField] private Room Room;
 
-    public Door NextRoomDoor;
+    [SerializeField] private Door NextRoomDoor;
 
-    public GameObject In;
+    [SerializeField] private GameObject In;
 
-    public void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         RoomManager.ChangeRoom(NextRoomDoor.Room);
         other.transform.position = NextRoomDoor.In.transform.position;
