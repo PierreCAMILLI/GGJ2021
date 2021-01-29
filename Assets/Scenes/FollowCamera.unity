@@ -219,8 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d521d708ee360cb43a4084dae45f9e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1832034034}
-  Velocity: {x: 0, y: 0, z: 0}
+  Target: {fileID: 1832034038}
   SmoothTime: 0.25
 --- !u!1 &1832034034
 GameObject:
