@@ -6,10 +6,10 @@ using UnityEngine.Events;
 public class ActionTrigger : MonoBehaviour
 {
     [SerializeField]
-    private UnityEvent<PlayerController> m_onActionInTriggerEvent;
+    private UnityEvent m_onActionInTriggerEvent;
 
-    public void OnActionInTriggerEvent(PlayerController player)
+    public void OnActionInTriggerEvent()
     {
-        m_onActionInTriggerEvent.Invoke(player);
+        m_onActionInTriggerEvent.Invoke();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ExploreState : FSMNode<EMainGameState>
 {
     private bool m_pauseGame;
+    private bool m_teleport;
 
     public ExploreState(FSM<EMainGameState> fsm, EMainGameState state) : base(fsm, state) { }
 
@@ -12,11 +13,18 @@ public class ExploreState : FSMNode<EMainGameState>
     {
         Debug.Log(ToString() + ": OnEnter");
         GlobalEvents.Instance.EventPauseGame.AddListener(this.PauseGame);
+        GlobalEvents.Instance.EventTeleport.AddListener(this.Teleport);
         m_pauseGame = false;
+        m_teleport = false;
     }
 
     protected override void Update()
     {
+        if (this.m_teleport)
+        {
+            ChangeState(EMainGameState.TeleportTransition);
+            return;
+        }
         if (this.m_pauseGame)
         {
             ChangeState(EMainGameState.Pause);
@@ -41,10 +49,16 @@ public class ExploreState : FSMNode<EMainGameState>
     {
         Debug.Log(ToString() + ": OnExit");
         GlobalEvents.Instance.EventPauseGame.RemoveListener(this.PauseGame);
+        GlobalEvents.Instance.EventTeleport.RemoveListener(this.Teleport);
     }
 
     private void PauseGame()
     {
         this.m_pauseGame = true;
+    }
+
+    private void Teleport()
+    {
+        this.m_teleport = true;
     }
 }
