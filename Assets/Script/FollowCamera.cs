@@ -1,29 +1,18 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class FollowCamera : MonoBehaviour
 {
-    [SerializeField] private GameObject Target;
-
-    [SerializeField] private Vector3 Velocity = Vector3.zero;
+    [SerializeField] private Transform Target;
 
     [SerializeField] private float SmoothTime;
 
-    private float _depth;
+    private Vector3 _velocity = Vector3.zero;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _depth = transform.position.z;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        Vector3 followPosition = Target.transform.position;
-        Vector3 targetPosition = new Vector3(followPosition.x, followPosition.y, _depth);
+        Vector3 followPosition = Target.position;
+        Vector3 targetPosition = new Vector3(followPosition.x, followPosition.y, -10f);
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref Velocity, SmoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref _velocity, SmoothTime);
     }
 }
