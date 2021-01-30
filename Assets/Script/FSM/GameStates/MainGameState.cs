@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum EMainGameState
 {
@@ -30,6 +31,7 @@ public class MainGameState : FSMNode<EGameState>
     protected override void OnEnter()
     {
         Debug.Log(ToString() + ": OnEnter");
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         GlobalEvents.Instance.EventBackToMenu.AddListener(RequestBackToMenu);
         m_requestBackToMenu = false;
 
