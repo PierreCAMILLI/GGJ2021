@@ -11,7 +11,7 @@ public enum EMainGameState
     Win,
     GameOver,
 
-    //TeleportTransition    // State to handle transition time during teleportations
+    TeleportTransition    // State to handle transition time during teleportations
 }
 
 public class MainGameState : FSMNode<EGameState>
