@@ -321,11 +321,33 @@
                 },
                 {
                     "name": "",
+                    "id": "b6c6332b-9e78-4352-aa29-dc2cc340b58f",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwitchSpellRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8ca1b3c7-92a1-43a0-92d0-26364e4e60f5",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "SwitchSpellLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d3690cb-fdb9-4b8e-bd68-f39205643323",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SwitchSpellLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
