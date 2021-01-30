@@ -17,12 +17,7 @@ namespace Dungeon
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            // todo: Remove this when trigger only targets the player
-            // if (true)
-            // {
-            //     Debug.Log("Remove this when trigger only targets the player");
-            //     return;
-            // }
+            if (!other.gameObject.CompareTag("Player")) return;
 
             RoomManager.ChangeRoom(NextRoomDoor.Room);
             other.transform.position = NextRoomDoor.In.transform.position;
