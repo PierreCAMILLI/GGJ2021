@@ -73,20 +73,25 @@ public class PlayerController : MonoBehaviour {
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         if(context.ReadValue<float>() == 1) {
             if(selectedSpell + 1 == spells.Length) {
+=======
+        if (context.ReadValue<float>() == 1) {
+            if (selectedSpell + 1 == spells.Length) {
+>>>>>>> Stashed changes
                 selectedSpell = 0;
-            } else {
+            }
+            else {
                 selectedSpell++;
             }
             Debug.Log("Spell: " + spells[selectedSpell]);
         }
-        
     }
 
     public void SwitchSpellLeft(InputAction.CallbackContext context) {
-       if(context.ReadValue<float>() == 1) {
-            if (selectedSpell - 1  == -1) {
+        if (context.ReadValue<float>() == 1) {
+            if (selectedSpell - 1 == -1) {
                 selectedSpell = spells.Length - 1;
             }
             else {
@@ -94,6 +99,7 @@ public class PlayerController : MonoBehaviour {
             }
             Debug.Log("Spell : " + spells[selectedSpell]);
         }
+<<<<<<< Updated upstream
         
 =======
         if (context.ReadValue<float>() == 1) {
@@ -111,6 +117,8 @@ public class PlayerController : MonoBehaviour {
             arraySpell[0].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.PreviousSpell];
             arraySpell[1].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.NextSpell];
         }  
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
