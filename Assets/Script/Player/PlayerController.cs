@@ -75,20 +75,16 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void Pause(InputAction.CallbackContext context) {
         GlobalEvents.Instance.EventPauseGame.Invoke();
-
-        if (inputIsActive) {
-            inputIsActive = false;
-        }
-        else {
-            inputIsActive = true;
-        }
-
         //Ne fonctionne pas (Crée un StackOverflow) donc j'ai mis un boolean un l'arrache pour éviter de perdre trop de temps
 
         /*if (GetComponent<PlayerInput>().inputIsActive)
             GetComponent<PlayerInput>().DeactivateInput();
         else
             GetComponent<PlayerInput>().ActivateInput();*/
+    }
+
+    public void setInputIsActive(bool value) {
+        inputIsActive = value;
     }
 
     public void Shockwave(InputAction.CallbackContext context) {
@@ -98,13 +94,14 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             foreach (var hitCollider in hitColliders) {
                 if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                } else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
+                }
+                else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                     hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
                 }
             }
-            
-            if(hitColliders.Length == 0) {
+
+            if (hitColliders.Length == 0) {
                 LoseLife();
             }
 
@@ -114,13 +111,11 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Interact(InputAction.CallbackContext context) {
-        if (inputIsActive)
-        {
+        if (inputIsActive) {
             Debug.Log("Interact");
             GetComponent<SpriteRenderer>().sprite = characterSprite[2];
 
-            foreach (ActionTrigger trigger in m_actionTriggers)
-            {
+            foreach (ActionTrigger trigger in m_actionTriggers) {
                 trigger.OnActionInTriggerEvent(this);
                 Debug.Log("Interact");
                 GetComponent<SpriteRenderer>().sprite = characterSprite[2];
@@ -159,8 +154,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     void FixedUpdate() {
         rb.velocity = new Vector2(velocity, rb.velocity.y);
-
-
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -171,17 +164,14 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             canJump = true;
 
         ActionTrigger trigger = other.gameObject.GetComponent<ActionTrigger>();
-        if (trigger)
-        {
+        if (trigger) {
             m_actionTriggers.Add(trigger);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
+    private void OnTriggerExit2D(Collider2D collision) {
         ActionTrigger trigger = collision.gameObject.GetComponent<ActionTrigger>();
-        if (trigger)
-        {
+        if (trigger) {
             m_actionTriggers.Remove(trigger);
         }
     }
@@ -195,5 +185,9 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void DestroyItem(GameObject gameObject) {
         Destroy(gameObject);
+    }
+
+    public void DisplayObject(GameObject gameObject) {
+        gameObject.SetActive(true);
     }
 }

@@ -13,6 +13,7 @@ public class ExploreState : FSMNode<EMainGameState>
         Debug.Log(ToString() + ": OnEnter");
         GlobalEvents.Instance.EventPauseGame.AddListener(this.PauseGame);
         m_pauseGame = false;
+        PlayerController.Instance.setInputIsActive(true);
     }
 
     protected override void Update()
@@ -41,7 +42,10 @@ public class ExploreState : FSMNode<EMainGameState>
     {
         Debug.Log(ToString() + ": OnExit");
         GlobalEvents.Instance.EventPauseGame.RemoveListener(this.PauseGame);
+        PlayerController.Instance.setInputIsActive(false);
     }
+
+ 
 
     private void PauseGame()
     {
