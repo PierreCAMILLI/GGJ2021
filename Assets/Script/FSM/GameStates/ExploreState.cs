@@ -17,9 +17,9 @@ public class ExploreState : FSMNode<EMainGameState>
 
     protected override void Update()
     {
-        if (Time.time >= this.StateTime + 3)
+        if (this.m_pauseGame)
         {
-            GlobalEvents.Instance.EventBackToMenu.Invoke();
+            ChangeState(EMainGameState.Pause);
             return;
         }
         if (PlayerInfos.Instance != null)
