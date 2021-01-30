@@ -9,8 +9,11 @@ public class GlobalEvents : Singleton<GlobalEvents>
     public UnityEvent EventStartGame { get; }
     public UnityEvent EventBackToMenu { get; }
 
+    public UnityEvent EventTeleport { get; }
     public UnityEvent EventPauseGame { get; }
     public UnityEvent EventResumeGame { get; }
+
+    public UnityEvent OnBlackScreenFadedEvent { get; }
 
     public GlobalEvents()
     {
@@ -18,7 +21,10 @@ public class GlobalEvents : Singleton<GlobalEvents>
         this.EventStartGame = new UnityEvent();
         this.EventBackToMenu = new UnityEvent();
 
+        this.EventTeleport = new UnityEvent();
         this.EventPauseGame = new UnityEvent();
         this.EventResumeGame = new UnityEvent();
+
+        this.OnBlackScreenFadedEvent = new UnityEvent();
     }
 }
