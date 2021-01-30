@@ -13,6 +13,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public Sprite[] spriteSpellUI;
     public Sprite[] spriteSpell;
     public Sprite[] characterSprite;
+    public Sprite staffSprite;
     public Slider manaBar;
     public float cooldown;
     public bool isFacingRight = true;
@@ -36,11 +37,13 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void Move(InputAction.CallbackContext context) {
         if (context.ReadValue<Vector2>().x != 0) {
             velocity = context.ReadValue<Vector2>().x * speed;
-
-            if (context.ReadValue<Vector2>().x > 0)
-                isFacingRight = true;
-            else
-                isFacingRight = false;
+            GetComponent<SpriteRenderer>().sprite = characterSprite[1];
+            if (context.ReadValue<Vector2>().x > 0) {
+                isFacingRight = GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else {
+                isFacingRight = GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
         else
             velocity = 0;
@@ -86,6 +89,8 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void Interact(InputAction.CallbackContext context) {
         Debug.Log("Interact");
+        GetComponent<SpriteRenderer>().sprite = characterSprite[2];
+        staffSprite = null;
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
