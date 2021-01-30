@@ -11,9 +11,10 @@ public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
     public bool isFacingRight = true;
     public float jumpForce;
-
+    public int selectedSpell;
     public float valueJump;
 
+    private string[] spells = { "Fire", "Ice", "Wind" };
     private Rigidbody2D rb;
     private float lastTimeUse;
     private float velocity;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 
     void Awake() {
         instance = this;
+        selectedSpell = 0;
     }
 
     void Start() {
@@ -52,6 +54,31 @@ public class PlayerController : MonoBehaviour {
 
             lastTimeUse = Time.time + cooldown;
         }
+    }
+
+    public void SwitchSpellRight(InputAction.CallbackContext context) {
+        if(context.ReadValue<float>() == 1) {
+            if(selectedSpell + 1 == spells.Length) {
+                selectedSpell = 0;
+            } else {
+                selectedSpell++;
+            }
+            Debug.Log("Spell: " + spells[selectedSpell]);
+        }
+        
+    }
+
+    public void SwitchSpellLeft(InputAction.CallbackContext context) {
+       if(context.ReadValue<float>() == 1) {
+            if (selectedSpell - 1  == -1) {
+                selectedSpell = spells.Length - 1;
+            }
+            else {
+                selectedSpell--;
+            }
+            Debug.Log("Spell : " + spells[selectedSpell]);
+        }
+        
     }
 
     //Jump
