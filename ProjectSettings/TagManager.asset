@@ -9,6 +9,7 @@ TagManager:
   - Wind
   - Ice
   - Key
+  - HiddenObject
   layers:
   - Default
   - TransparentFX
