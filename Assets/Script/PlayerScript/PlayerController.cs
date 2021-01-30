@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public float speed;
     public GameObject spell;
