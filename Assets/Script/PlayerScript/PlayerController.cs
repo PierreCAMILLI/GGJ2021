@@ -1,20 +1,19 @@
-using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public float speed;
     public GameObject spell;
+    public GameObject shockwaveAnimation;
     public GameObject muzzleRight;
     public GameObject muzzleLeft;
     public GameObject[] arraySpellUI;
     public Sprite[] spriteSpellUI;
     public Sprite[] spriteSpell;
+    public Sprite[] characterSprite;
     public Slider manaBar;
-    public ParticleSystem shockwaveAnimation;
     public float cooldown;
     public bool isFacingRight = true;
     public float jumpForce;
@@ -73,16 +72,17 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         if (PlayerInfos.Instance.CanCast(1)) {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
 
-            foreach(var hitCollider in hitColliders) {
-                if (hitCollider.gameObject.tag.Equals("Invisible")) {
+            foreach (var hitCollider in hitColliders) {
+                if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                 }
             }
             manaBar.value -= 0;
+            Instantiate(shockwaveAnimation, transform.position, transform.rotation);
         }
     }
 
-    
+
 
     public void Interact(InputAction.CallbackContext context) {
         Debug.Log("Interact");
@@ -109,7 +109,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     //Jump
     public void Jump(InputAction.CallbackContext context) {
         if (canJump) {
-            if (context.ReadValue<float>() > 0) {
+            if (context.ReadValue<float>() == 1) {
                 canJump = false;
                 rb.velocity = new Vector2(rb.position.x, jumpForce);
             }
@@ -122,6 +122,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        canJump = true;
+        if (!other.tag.Equals("HiddenObject"))
+            canJump = true;
     }
 }
