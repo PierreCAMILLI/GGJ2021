@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInfos : SingletonBehaviour<PlayerInfos> {
     [SerializeField]
@@ -32,20 +33,20 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos> {
     private int m_selectedSpellIndex = 0;
 
     private bool m_won;
-    public bool Won
-    {
+    public bool Won {
         get { return m_won; }
         set { m_won = value; }
     }
 
     public Spell SelectedSpell { get { return this.Spells[m_selectedSpellIndex]; } }
-    public int NextSpell { 
+
+    public int NextSpell {
         get {
             if (m_selectedSpellIndex == Spells.Length - 1)
                 return 0;
             else
                 return m_selectedSpellIndex + 1;
-        } 
+        }
     }
     public int PreviousSpell {
         get {
@@ -76,8 +77,7 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos> {
         this.InitGame();
     }
 
-    public void InitGame()
-    {
+    public void InitGame() {
         this.m_life = this.LifeMax;
         this.m_magic = 1.0f;
         this.m_keys = 0;
@@ -86,19 +86,30 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos> {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         this.UpdateMagic();
     }
 
-    private void UpdateMagic()
-    {
-        if (this.m_timeToFillMagic == 0f)
-        {
+    //Check if we have enought mana to cast a spell
+    public bool CanCast(float manaCost) {
+        Debug.Log(this.m_magic);
+        if (this.m_magic >= manaCost) {
+            this.m_magic -= manaCost;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public Slider manaBar;
+
+    private void UpdateMagic() {
+        if (this.m_timeToFillMagic == 0f) {
             this.m_magic = 1f;
         }
         else {
             this.Magic += Time.deltaTime / m_timeToFillMagic;
         }
+        manaBar.value = this.m_magic * manaBar.maxValue;
     }
 }

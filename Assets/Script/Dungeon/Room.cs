@@ -2,5 +2,15 @@ using UnityEngine;
 
 namespace Dungeon
 {
-    public class Room : MonoBehaviour {}
+    using System;
+
+    public class Room : MonoBehaviour
+    {
+        public RoomManager RoomManager;
+
+        public void Awake()
+        {
+            RoomManager.RegisterRoom(this);
+        }
+    }
 }
