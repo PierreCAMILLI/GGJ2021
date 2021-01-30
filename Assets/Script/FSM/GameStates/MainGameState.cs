@@ -30,7 +30,7 @@ public class MainGameState : FSMNode<EGameState>
     protected override void OnEnter()
     {
         Debug.Log(ToString() + ": OnEnter");
-        GameFSM.AddDelegate("BackToMenu", RequestBackToMenu);
+        //GameFSM.AddDelegate("BackToMenu", RequestBackToMenu);
         m_requestBackToMenu = false;
 
         this.MainGameFSM.Enter();
@@ -54,7 +54,7 @@ public class MainGameState : FSMNode<EGameState>
         this.MainGameFSM.Exit();
 
         Debug.Log(ToString() + ": OnExit");
-        GameFSM.RemoveDelegate("BackToMenu", RequestBackToMenu);
+        //GameFSM.RemoveDelegate("BackToMenu", RequestBackToMenu);
     }
 
     private void RequestBackToMenu()
