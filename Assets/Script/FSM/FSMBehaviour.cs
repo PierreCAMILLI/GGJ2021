@@ -23,12 +23,13 @@ public class GameFSM : FSM<EGameState>
     }
 }
 
-public class FSMBehaviour : MonoBehaviour
+public class FSMBehaviour : SingletonBehaviour<FSMBehaviour>
 {
     private GameFSM FSM { get; set; }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         this.FSM = new GameFSM();
         this.FSM.CreateFSM();
     }
