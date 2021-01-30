@@ -1198,7 +1198,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6657668892366323782, guid: 244ecb21b3a16b84a802e37801b1f329, type: 3}
   m_PrefabInstance: {fileID: 422319772}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1103642367
+--- !u!114 &1103642370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1478,7 +1478,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6657668892266170154, guid: 244ecb21b3a16b84a802e37801b1f329, type: 3}
   m_PrefabInstance: {fileID: 422319772}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1493427792
+--- !u!114 &1493427795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1785,6 +1785,10 @@ PrefabInstance:
     - target: {fileID: 4244156833876020129, guid: 61655019df1a2644b886beb54bb95ac3, type: 3}
       propertyPath: m_Tiles.Array.data[86].second.m_TileSpriteIndex
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244156833968959233, guid: 61655019df1a2644b886beb54bb95ac3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4244156834046848701, guid: 61655019df1a2644b886beb54bb95ac3, type: 3}
       propertyPath: m_Size.x
@@ -9833,12 +9837,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6657668891254802666, guid: 244ecb21b3a16b84a802e37801b1f329, type: 3}
   m_PrefabInstance: {fileID: 422319772}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2033657746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4244156833968959263, guid: 61655019df1a2644b886beb54bb95ac3, type: 3}
+  m_PrefabInstance: {fileID: 1803986022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2033657751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033657746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f437383fee84644287ea24adb24b901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 1
 --- !u!1 &2039296999 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6657668892346471787, guid: 244ecb21b3a16b84a802e37801b1f329, type: 3}
   m_PrefabInstance: {fileID: 422319772}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2039297000
+--- !u!114 &2039297003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
