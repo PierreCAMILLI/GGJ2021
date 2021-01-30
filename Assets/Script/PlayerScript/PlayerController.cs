@@ -51,11 +51,10 @@ public class PlayerController : MonoBehaviour {
 
     //Cast a spell
     public void Fire(InputAction.CallbackContext context) {
-<<<<<<< Updated upstream
-=======
+
         GameObject spellCast;
 
->>>>>>> Stashed changes
+
         if (Time.time > lastTimeUse) {
             if (muzzleRight.active) {
                 spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
@@ -72,42 +71,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        if(context.ReadValue<float>() == 1) {
-            if(selectedSpell + 1 == spells.Length) {
-=======
-        if (context.ReadValue<float>() == 1) {
-            if (selectedSpell + 1 == spells.Length) {
->>>>>>> Stashed changes
-                selectedSpell = 0;
-            }
-            else {
-                selectedSpell++;
-            }
-            Debug.Log("Spell: " + spells[selectedSpell]);
-        }
-    }
-
-    public void SwitchSpellLeft(InputAction.CallbackContext context) {
-        if (context.ReadValue<float>() == 1) {
-            if (selectedSpell - 1 == -1) {
-                selectedSpell = spells.Length - 1;
-            }
-            else {
-                selectedSpell--;
-            }
-            Debug.Log("Spell : " + spells[selectedSpell]);
-        }
-<<<<<<< Updated upstream
-        
-=======
         if (context.ReadValue<float>() == 1) {
             PlayerInfos.Instance.SelectNextSpell();
 
             arraySpell[0].GetComponent<Image>().sprite = spriteSpell[(int)PlayerInfos.Instance.PreviousSpell];
             arraySpell[1].GetComponent<Image>().sprite = spriteSpell[(int)PlayerInfos.Instance.NextSpell];
-        } 
+        }
     }
 
     public void SwitchSpellLeft(InputAction.CallbackContext context) {
@@ -116,10 +85,8 @@ public class PlayerController : MonoBehaviour {
 
             arraySpell[0].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.PreviousSpell];
             arraySpell[1].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.NextSpell];
-        }  
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+        }
+
     }
 
     //Jump
