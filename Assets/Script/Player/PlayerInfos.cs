@@ -62,7 +62,6 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos> {
             m_selectedSpellIndex = 0;
         else
             m_selectedSpellIndex++;
-
     }
 
     public void SelectPreviousSpell() {

@@ -28,5 +28,6 @@ public class MagicTrigger : MonoBehaviour
                 m_onBadSpellTouchedEvent.Invoke();
             }
         }
+        
     }
 }
