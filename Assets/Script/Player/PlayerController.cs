@@ -98,6 +98,9 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             foreach (var hitCollider in hitColliders) {
                 if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                } else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
+                    hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
                 }
             }
             manaBar.value -= 0;
@@ -151,10 +154,15 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     void FixedUpdate() {
         rb.velocity = new Vector2(velocity, rb.velocity.y);
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (!other.tag.Equals("HiddenObject"))
+
+        if (other.tag != "HiddenObject" && other.tag != "HiddenObjectCollider")
+            canJump = true;
+        else if (other.GetComponent<SpriteRenderer>().enabled)
             canJump = true;
 
         ActionTrigger trigger = other.gameObject.GetComponent<ActionTrigger>();
