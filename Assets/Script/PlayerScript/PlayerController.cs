@@ -10,16 +10,19 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public GameObject spell;
     public GameObject muzzleRight;
     public GameObject muzzleLeft;
+    public GameObject[] arraySpellUI;
+    public Sprite[] spriteSpellUI;
+    public Sprite[] spriteSpell;
+    public Slider manaBar;
+    public ParticleSystem shockwaveAnimation;
     public float cooldown;
-    public static PlayerController instance;
     public bool isFacingRight = true;
     public float jumpForce;
     public int selectedSpell;
     public float valueJump;
-    public GameObject[] arraySpell;
-    public Sprite[] spriteSpell;
+    public float manaCostSpell = 0.3f;
+    public float manaCostShockwave = 1f;
 
-    private string[] spells = { "Fire", "Ice", "Wind" };
     private Rigidbody2D rb;
     private float lastTimeUse;
     private float velocity;
@@ -27,7 +30,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-
         selectedSpell = 0;
     }
 
@@ -40,7 +42,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
                 isFacingRight = true;
             else
                 isFacingRight = false;
-
         }
         else
             velocity = 0;
@@ -51,28 +52,48 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
         GameObject spellCast;
 
-
         if (Time.time > lastTimeUse) {
-            if (muzzleRight.active) {
-                spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
+            if (PlayerInfos.Instance.CanCast(1)) {
+                if (muzzleRight.active)
+                    spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
+                else
+                    spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+
                 spellCast.tag = PlayerInfos.Instance.SelectedSpell.ToString();
                 spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
-            }
-            else
-                spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
-            spellCast.tag = PlayerInfos.Instance.SelectedSpell.ToString();
-            spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
 
-            lastTimeUse = Time.time + cooldown;
+                manaBar.value -= 0;
+
+                lastTimeUse = Time.time + cooldown;
+            }
         }
+    }
+
+    public void Shockwave(InputAction.CallbackContext context) {
+        if (PlayerInfos.Instance.CanCast(1)) {
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
+
+            foreach(var hitCollider in hitColliders) {
+                if (hitCollider.gameObject.tag.Equals("Invisible")) {
+                    hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                }
+            }
+            manaBar.value -= 0;
+        }
+    }
+
+    
+
+    public void Interact(InputAction.CallbackContext context) {
+        Debug.Log("Interact");
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
         if (context.ReadValue<float>() == 1) {
             PlayerInfos.Instance.SelectNextSpell();
 
-            arraySpell[0].GetComponent<Image>().sprite = spriteSpell[(int)PlayerInfos.Instance.PreviousSpell];
-            arraySpell[1].GetComponent<Image>().sprite = spriteSpell[(int)PlayerInfos.Instance.NextSpell];
+            arraySpellUI[0].GetComponent<Image>().sprite = spriteSpellUI[(int)PlayerInfos.Instance.PreviousSpell];
+            arraySpellUI[1].GetComponent<Image>().sprite = spriteSpellUI[(int)PlayerInfos.Instance.NextSpell];
         }
     }
 
@@ -80,10 +101,9 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         if (context.ReadValue<float>() == 1) {
             PlayerInfos.Instance.SelectPreviousSpell();
 
-            arraySpell[0].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.PreviousSpell];
-            arraySpell[1].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.NextSpell];
+            arraySpellUI[0].GetComponent<Image>().sprite = spriteSpellUI[PlayerInfos.Instance.PreviousSpell];
+            arraySpellUI[1].GetComponent<Image>().sprite = spriteSpellUI[PlayerInfos.Instance.NextSpell];
         }
-
     }
 
     //Jump
