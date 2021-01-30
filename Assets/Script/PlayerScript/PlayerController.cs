@@ -1,5 +1,8 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -13,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce;
     public int selectedSpell;
     public float valueJump;
+    public GameObject[] arraySpell;
+    public Sprite[] spriteSpell;
 
     private string[] spells = { "Fire", "Ice", "Wind" };
     private Rigidbody2D rb;
@@ -46,17 +51,28 @@ public class PlayerController : MonoBehaviour {
 
     //Cast a spell
     public void Fire(InputAction.CallbackContext context) {
+<<<<<<< Updated upstream
+=======
+        GameObject spellCast;
+
+>>>>>>> Stashed changes
         if (Time.time > lastTimeUse) {
-            if (muzzleRight.active)
-                Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
+            if (muzzleRight.active) {
+                spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
+                spellCast.tag = PlayerInfos.Instance.SelectedSpell.ToString();
+                spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
+            }
             else
-                Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+                spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+            spellCast.tag = PlayerInfos.Instance.SelectedSpell.ToString();
+            spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
 
             lastTimeUse = Time.time + cooldown;
         }
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
+<<<<<<< Updated upstream
         if(context.ReadValue<float>() == 1) {
             if(selectedSpell + 1 == spells.Length) {
                 selectedSpell = 0;
@@ -79,6 +95,23 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("Spell : " + spells[selectedSpell]);
         }
         
+=======
+        if (context.ReadValue<float>() == 1) {
+            PlayerInfos.Instance.SelectNextSpell();
+
+            arraySpell[0].GetComponent<Image>().sprite = spriteSpell[(int)PlayerInfos.Instance.PreviousSpell];
+            arraySpell[1].GetComponent<Image>().sprite = spriteSpell[(int)PlayerInfos.Instance.NextSpell];
+        } 
+    }
+
+    public void SwitchSpellLeft(InputAction.CallbackContext context) {
+        if (context.ReadValue<float>() == 1) {
+            PlayerInfos.Instance.SelectPreviousSpell();
+
+            arraySpell[0].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.PreviousSpell];
+            arraySpell[1].GetComponent<Image>().sprite = spriteSpell[PlayerInfos.Instance.NextSpell];
+        }  
+>>>>>>> Stashed changes
     }
 
     //Jump
