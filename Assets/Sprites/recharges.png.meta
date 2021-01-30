@@ -1,7 +1,322 @@
 fileFormatVersion: 2
 guid: 6b88e89217ca8c84a88b193eb31057a6
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2212611262630577254
+    second: recharges_0
+  - first:
+      213: -3048439431517146670
+    second: recharges_1
+  - first:
+      213: 398660514008315071
+    second: recharges_2
+  - first:
+      213: 5848754158136336045
+    second: recharges_3
+  - first:
+      213: 3603387967612737683
+    second: recharges_4
+  - first:
+      213: -9165844041161764748
+    second: recharges_5
+  - first:
+      213: -1997479194922115359
+    second: recharges_6
+  - first:
+      213: -5213046421062976728
+    second: recharges_7
+  - first:
+      213: -7021172445089131583
+    second: recharges_8
+  - first:
+      213: 4701825606960422862
+    second: recharges_9
+  - first:
+      213: -1870726854050735200
+    second: recharges_10
+  - first:
+      213: 7607337972173101470
+    second: recharges_11
+  - first:
+      213: -5989765268066595352
+    second: recharges_12
+  - first:
+      213: 4761823253891202480
+    second: recharges_13
+  - first:
+      213: -462961380561524931
+    second: recharges_14
+  - first:
+      213: -7777596295688079218
+    second: recharges_15
+  - first:
+      213: -3395150440439409109
+    second: recharges_16
+  - first:
+      213: -5438359376929095373
+    second: recharges_17
+  - first:
+      213: -3834981434331928484
+    second: recharges_18
+  - first:
+      213: 7575822273601918214
+    second: recharges_19
+  - first:
+      213: -2639931644486038835
+    second: recharges_20
+  - first:
+      213: -1754579175884161446
+    second: recharges_21
+  - first:
+      213: 4390970451725827131
+    second: recharges_22
+  - first:
+      213: -1361019986616205818
+    second: recharges_23
+  - first:
+      213: 4104093623108958007
+    second: recharges_24
+  - first:
+      213: -3703058677707222726
+    second: recharges_25
+  - first:
+      213: -9024814473450967913
+    second: recharges_26
+  - first:
+      213: 6369255221023549591
+    second: recharges_27
+  - first:
+      213: 152366317440050160
+    second: recharges_28
+  - first:
+      213: 7744776505707345250
+    second: recharges_29
+  - first:
+      213: 7490509952099524817
+    second: recharges_30
+  - first:
+      213: -6786576910326710640
+    second: recharges_31
+  - first:
+      213: 302313049350315390
+    second: recharges_32
+  - first:
+      213: -6569633149577423297
+    second: recharges_33
+  - first:
+      213: -145078644991672333
+    second: recharges_34
+  - first:
+      213: -4399390531482229338
+    second: recharges_35
+  - first:
+      213: 2777963725832491412
+    second: recharges_36
+  - first:
+      213: -8614698122736748740
+    second: recharges_37
+  - first:
+      213: -316860974184786338
+    second: recharges_38
+  - first:
+      213: 9097567878740154995
+    second: recharges_39
+  - first:
+      213: 1356549989615827667
+    second: recharges_40
+  - first:
+      213: -5990418600005077363
+    second: recharges_41
+  - first:
+      213: 6905410239867834802
+    second: recharges_42
+  - first:
+      213: -8478970134483934718
+    second: recharges_43
+  - first:
+      213: 3567117242548270183
+    second: recharges_44
+  - first:
+      213: 6964301795327726241
+    second: recharges_45
+  - first:
+      213: 825740007532380556
+    second: recharges_46
+  - first:
+      213: -6455882934944633238
+    second: recharges_47
+  - first:
+      213: 2851716147175372465
+    second: recharges_48
+  - first:
+      213: -3607602441520651356
+    second: recharges_49
+  - first:
+      213: 3767391982449512499
+    second: recharges_50
+  - first:
+      213: 6732507925341770709
+    second: recharges_51
+  - first:
+      213: -728376132619153273
+    second: recharges_52
+  - first:
+      213: -7109721180962351698
+    second: recharges_53
+  - first:
+      213: -8446276174221309419
+    second: recharges_54
+  - first:
+      213: 5386200791643576851
+    second: recharges_55
+  - first:
+      213: -7563868622460825648
+    second: recharges_56
+  - first:
+      213: 4088425539185944536
+    second: recharges_57
+  - first:
+      213: -6343580233658595071
+    second: recharges_58
+  - first:
+      213: 4723677210922478821
+    second: recharges_59
+  - first:
+      213: -7028555480752456136
+    second: recharges_60
+  - first:
+      213: -162027061758317859
+    second: recharges_61
+  - first:
+      213: 5504707131433727772
+    second: recharges_62
+  - first:
+      213: -7556204382766025854
+    second: recharges_63
+  - first:
+      213: -8242143558433138033
+    second: recharges_64
+  - first:
+      213: 7791271765165524472
+    second: recharges_65
+  - first:
+      213: -4609128502252014262
+    second: recharges_66
+  - first:
+      213: 7759176339432723675
+    second: recharges_67
+  - first:
+      213: -3394843689636084645
+    second: recharges_68
+  - first:
+      213: -7067799093810553434
+    second: recharges_69
+  - first:
+      213: 1074497090595524667
+    second: recharges_70
+  - first:
+      213: -7761895920353550943
+    second: recharges_71
+  - first:
+      213: -1362245763166097674
+    second: recharges_72
+  - first:
+      213: 2766746520278545083
+    second: recharges_73
+  - first:
+      213: 2441837105867704909
+    second: recharges_74
+  - first:
+      213: 3333935283395197216
+    second: recharges_75
+  - first:
+      213: 9207429336182289305
+    second: recharges_76
+  - first:
+      213: 2040805788644925889
+    second: recharges_77
+  - first:
+      213: -2179446448194659999
+    second: recharges_78
+  - first:
+      213: -4336292196631682573
+    second: recharges_79
+  - first:
+      213: 8899048973425561286
+    second: recharges_80
+  - first:
+      213: 1438637258972305728
+    second: recharges_81
+  - first:
+      213: 2247149353555458874
+    second: recharges_82
+  - first:
+      213: -4755944449510895399
+    second: recharges_83
+  - first:
+      213: 6234664350783474763
+    second: recharges_84
+  - first:
+      213: 7178571108534012339
+    second: recharges_85
+  - first:
+      213: 6276040527077575822
+    second: recharges_86
+  - first:
+      213: -6994353119213107386
+    second: recharges_87
+  - first:
+      213: 2442831526840462988
+    second: recharges_88
+  - first:
+      213: -3647457083596990875
+    second: recharges_89
+  - first:
+      213: -2451923166377427873
+    second: recharges_90
+  - first:
+      213: 4469329952715778152
+    second: recharges_91
+  - first:
+      213: 8382670989003672934
+    second: recharges_92
+  - first:
+      213: 55217032244330566
+    second: recharges_93
+  - first:
+      213: 7772523507471965914
+    second: recharges_94
+  - first:
+      213: 4740093013205860848
+    second: recharges_95
+  - first:
+      213: -8985594713987576701
+    second: recharges_96
+  - first:
+      213: 462764094128274921
+    second: recharges_97
+  - first:
+      213: 7795414492645913168
+    second: recharges_98
+  - first:
+      213: 8948286503991172909
+    second: recharges_99
+  - first:
+      213: 6989751750854469512
+    second: recharges_100
+  - first:
+      213: -2692228998641918606
+    second: recharges_101
+  - first:
+      213: -3453606431586868387
+    second: recharges_102
+  - first:
+      213: 6704305209306021171
+    second: recharges_103
+  - first:
+      213: 3134097682803429240
+    second: recharges_104
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +356,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,9 +390,63 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: recharges_0
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 662
+        width: 460
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b30e097c93b41e0800000000000000
+      internalID: -2212611262630577254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: recharges_1
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 662
+        width: 460
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d170250d74c1b5d0800000000000000
+      internalID: -3048439431517146670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

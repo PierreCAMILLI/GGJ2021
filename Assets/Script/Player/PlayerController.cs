@@ -13,7 +13,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public Sprite[] spriteSpellUI;
     public Sprite[] spriteSpell;
     public Sprite[] characterSprite;
-    public Sprite staffSprite;
     public Slider manaBar;
     public float cooldown;
     public bool isFacingRight = true;
@@ -51,7 +50,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     //Cast a spell
     public void Fire(InputAction.CallbackContext context) {
-
         GameObject spellCast;
 
         if (Time.time > lastTimeUse) {
@@ -61,7 +59,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
                 else
                     spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
 
-                spellCast.tag = PlayerInfos.Instance.SelectedSpell.ToString();
                 spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
 
                 manaBar.value -= 0;
@@ -69,6 +66,13 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
                 lastTimeUse = Time.time + cooldown;
             }
         }
+    }
+
+    public void Pause(InputAction.CallbackContext context) {
+        if (GetComponent<PlayerInput>().enabled)
+            GetComponent<PlayerInput>().enabled = false;
+        else
+            GetComponent<PlayerInput>().enabled = true;
     }
 
     public void Shockwave(InputAction.CallbackContext context) {
@@ -85,12 +89,9 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         }
     }
 
-
-
     public void Interact(InputAction.CallbackContext context) {
         Debug.Log("Interact");
         GetComponent<SpriteRenderer>().sprite = characterSprite[2];
-        staffSprite = null;
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {

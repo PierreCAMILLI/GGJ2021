@@ -19,7 +19,14 @@ public class MagicTrigger : MonoBehaviour
         SpellController spell = collision.gameObject.GetComponent<SpellController>();
         if (spell)
         {
-            //if (spell.)
+            if (spell.getType() == m_goodSpellToUse)
+            {
+                m_onGoodSpellTouchedEvent.Invoke();
+            }
+            else
+            {
+                m_onBadSpellTouchedEvent.Invoke();
+            }
         }
     }
 }
