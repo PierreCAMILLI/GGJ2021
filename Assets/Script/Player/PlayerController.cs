@@ -23,7 +23,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public float valueJump;
     public float manaCostSpell = 0.3f;
     public float manaCostShockwave = 1f;
-    public UnityEvent<int> lifeChanged = new UnityEvent<int>();
 
     private Rigidbody2D rb;
     private float lastTimeUse;
@@ -157,7 +156,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void TakeDamage(int amount)
     {
         PlayerInfos.Instance.Life -= amount;
-        lifeChanged.Invoke(PlayerInfos.Instance.Life);
     }
 
     void FixedUpdate() {

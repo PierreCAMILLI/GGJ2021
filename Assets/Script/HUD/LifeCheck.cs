@@ -6,9 +6,9 @@ namespace HUD
     {
         [SerializeField] private int LifeAmount;
 
-        public void Execute(int currentLife)
+        public void Update()
         {
-            gameObject.SetActive(currentLife >= LifeAmount);
+            gameObject.SetActive(PlayerInfos.Instance.Life >= LifeAmount);
         }
     }
 }
