@@ -27,6 +27,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     private float lastTimeUse;
     private float velocity;
     private bool canJump = true;
+    private bool inputIsActive = true;
 
     private HashSet<ActionTrigger> m_actionTriggers;
 
@@ -38,7 +39,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     //Movement controller
     public void Move(InputAction.CallbackContext context) {
-        if (context.ReadValue<Vector2>().x != 0) {
+        if (context.ReadValue<Vector2>().x != 0 && inputIsActive) {
             velocity = context.ReadValue<Vector2>().x * speed;
             GetComponent<SpriteRenderer>().sprite = characterSprite[1];
             if (context.ReadValue<Vector2>().x > 0) {
@@ -56,7 +57,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void Fire(InputAction.CallbackContext context) {
         GameObject spellCast;
 
-        if (Time.time > lastTimeUse) {
+        if (Time.time > lastTimeUse && inputIsActive) {
             if (PlayerInfos.Instance.CanCast(1)) {
                 if (muzzleRight.active)
                     spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
@@ -73,14 +74,25 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Pause(InputAction.CallbackContext context) {
-        if (GetComponent<PlayerInput>().enabled)
-            GetComponent<PlayerInput>().enabled = false;
+        GlobalEvents.Instance.EventPauseGame.Invoke();
+
+        if (inputIsActive) {
+            inputIsActive = false;
+        }
+        else {
+            inputIsActive = true;
+        }
+
+        //Ne fonctionne pas (Crée un StackOverflow) donc j'ai mis un boolean un l'arrache pour éviter de perdre trop de temps
+
+        /*if (GetComponent<PlayerInput>().inputIsActive)
+            GetComponent<PlayerInput>().DeactivateInput();
         else
-            GetComponent<PlayerInput>().enabled = true;
+            GetComponent<PlayerInput>().ActivateInput();*/
     }
 
     public void Shockwave(InputAction.CallbackContext context) {
-        if (PlayerInfos.Instance.CanCast(1)) {
+        if (PlayerInfos.Instance.CanCast(1) && inputIsActive) {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
 
             foreach (var hitCollider in hitColliders) {
@@ -94,17 +106,22 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Interact(InputAction.CallbackContext context) {
-        Debug.Log("Interact");
-        GetComponent<SpriteRenderer>().sprite = characterSprite[2];
-
-        foreach (ActionTrigger trigger in m_actionTriggers)
+        if (inputIsActive)
         {
-            trigger.OnActionInTriggerEvent(this);
+            Debug.Log("Interact");
+            GetComponent<SpriteRenderer>().sprite = characterSprite[2];
+
+            foreach (ActionTrigger trigger in m_actionTriggers)
+            {
+                trigger.OnActionInTriggerEvent(this);
+                Debug.Log("Interact");
+                GetComponent<SpriteRenderer>().sprite = characterSprite[2];
+            }
         }
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
-        if (context.ReadValue<float>() == 1) {
+        if (context.ReadValue<float>() == 1 && inputIsActive) {
             PlayerInfos.Instance.SelectNextSpell();
 
             arraySpellUI[0].GetComponent<Image>().sprite = spriteSpellUI[(int)PlayerInfos.Instance.PreviousSpell];
@@ -113,7 +130,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void SwitchSpellLeft(InputAction.CallbackContext context) {
-        if (context.ReadValue<float>() == 1) {
+        if (context.ReadValue<float>() == 1 && inputIsActive) {
             PlayerInfos.Instance.SelectPreviousSpell();
 
             arraySpellUI[0].GetComponent<Image>().sprite = spriteSpellUI[PlayerInfos.Instance.PreviousSpell];
@@ -123,7 +140,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     //Jump
     public void Jump(InputAction.CallbackContext context) {
-        if (canJump) {
+        if (canJump && inputIsActive) {
             if (context.ReadValue<float>() == 1) {
                 canJump = false;
                 rb.velocity = new Vector2(rb.position.x, jumpForce);

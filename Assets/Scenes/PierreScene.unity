@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf756d5d93fcee44863c7fa7436445a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dontDestroyOnLoad: 0
 --- !u!4 &1638173663
 Transform:
   m_ObjectHideFlags: 0
@@ -265,3 +266,5 @@ MonoBehaviour:
   m_dontDestroyOnLoad: 0
   m_lifeMax: 3
   m_timeToFillMagic: 1
+  Spells: 000000000100000002000000
+  manaBar: {fileID: 0}
