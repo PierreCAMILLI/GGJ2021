@@ -17,13 +17,18 @@ public abstract class FSMNode<E>
 
     public virtual void Init() { }
     protected virtual void OnEnter() { }
-    public virtual void Update() { }
+    protected virtual void Update() { }
     protected virtual void OnExit() { }
 
     public void Enter()
     {
         this.StateTime = Time.time;
         this.OnEnter();
+    }
+
+    public void Execute()
+    {
+        this.Update();
     }
 
     public void Exit()

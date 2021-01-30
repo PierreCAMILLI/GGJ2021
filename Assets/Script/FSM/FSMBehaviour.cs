@@ -6,7 +6,8 @@ public enum EGameState
 {
     MainMenu,
     Tuto,
-    MainGame
+    MainGame,
+    QuitGame
 }
 
 public class GameFSM : FSM<EGameState>

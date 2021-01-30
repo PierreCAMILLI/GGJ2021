@@ -11,7 +11,7 @@ public class TutoState : FSMNode<EGameState>
         Debug.Log(ToString() + ": OnEnter");
     }
 
-    public override void Update()
+    protected override void Update()
     {
 
     }

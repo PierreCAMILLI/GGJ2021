@@ -15,6 +15,8 @@ public enum EMainGameState
 
 public class MainGameState : FSMNode<EGameState>
 {
+    private bool m_requestBackToMenu = false;
+
     private MainGameFSM MainGameFSM { get; set; }
 
     public MainGameState(FSM<EGameState> fsm, EGameState state) : base(fsm, state) { }
@@ -28,11 +30,18 @@ public class MainGameState : FSMNode<EGameState>
     protected override void OnEnter()
     {
         Debug.Log(ToString() + ": OnEnter");
+        GameFSM.AddDelegate("BackToMenu", RequestBackToMenu);
+        m_requestBackToMenu = false;
+
         this.MainGameFSM.Enter();
     }
 
-    public override void Update()
+    protected override void Update()
     {
+        if (m_requestBackToMenu)
+        {
+            ChangeState(EGameState.MainMenu);
+        }
         if (Time.time >= this.StateTime + 3)
         {
             ChangeState(EGameState.MainMenu);
@@ -43,7 +52,14 @@ public class MainGameState : FSMNode<EGameState>
     protected override void OnExit()
     {
         this.MainGameFSM.Exit();
+
         Debug.Log(ToString() + ": OnExit");
+        GameFSM.RemoveDelegate("BackToMenu", RequestBackToMenu);
+    }
+
+    private void RequestBackToMenu()
+    {
+        m_requestBackToMenu = true;
     }
 }
 

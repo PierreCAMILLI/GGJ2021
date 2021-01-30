@@ -12,6 +12,31 @@ public class StateNotIncludedException<E> : System.Exception
 
 public abstract class FSM<E>
 {
+    public delegate void FSMDelegate();
+    private static Dictionary<string, FSMDelegate> m_delegates;
+    public static void AddDelegate(string name, FSMDelegate del)
+    {
+        if (m_delegates.ContainsKey(name))
+        {
+            m_delegates[name] += del;
+        }
+        else
+        {
+            m_delegates.Add(name, del);
+        }
+    }
+    public static void RemoveDelegate(string name, FSMDelegate del)
+    {
+        if (m_delegates.ContainsKey(name))
+        {
+            m_delegates[name] -= del;
+        }
+    }
+    public static void RaiseDelegate(string name)
+    {
+        m_delegates[name].Invoke();
+    }
+
     public E CurrentState { get; set; }
     public E RootState { get; protected set; }
     private Dictionary<E, FSMNode<E>> States { get; set; }
@@ -46,7 +71,7 @@ public abstract class FSM<E>
             FSMNode<E> node;
             if (this.States.TryGetValue(state, out node))
             {
-                node.Update();
+                node.Execute();
                 isDifferentState = !state.Equals(this.CurrentState);
                 if (isDifferentState)
                 {
