@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerController : SingletonBehaviour<PlayerController> {
 
@@ -27,9 +28,12 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     private float velocity;
     private bool canJump = true;
 
+    private HashSet<ActionTrigger> m_actionTriggers;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         selectedSpell = 0;
+        m_actionTriggers = new HashSet<ActionTrigger>();
     }
 
     //Movement controller
@@ -92,6 +96,11 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void Interact(InputAction.CallbackContext context) {
         Debug.Log("Interact");
         GetComponent<SpriteRenderer>().sprite = characterSprite[2];
+
+        foreach (ActionTrigger trigger in m_actionTriggers)
+        {
+            trigger.OnActionInTriggerEvent(this);
+        }
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
@@ -130,5 +139,20 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     void OnTriggerEnter2D(Collider2D other) {
         if (!other.tag.Equals("HiddenObject"))
             canJump = true;
+
+        ActionTrigger trigger = other.gameObject.GetComponent<ActionTrigger>();
+        if (trigger)
+        {
+            m_actionTriggers.Add(trigger);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        ActionTrigger trigger = collision.gameObject.GetComponent<ActionTrigger>();
+        if (trigger)
+        {
+            m_actionTriggers.Remove(trigger);
+        }
     }
 }

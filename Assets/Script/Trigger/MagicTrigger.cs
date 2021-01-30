@@ -14,7 +14,7 @@ public class MagicTrigger : MonoBehaviour
     [SerializeField]
     private UnityEvent m_onBadSpellTouchedEvent;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         SpellController spell = collision.gameObject.GetComponent<SpellController>();
         if (spell)
