@@ -67,6 +67,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "e0859aac-d155-4f42-af1d-c7d13d2ac0e4",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "WASD",
                     "id": "00ca640b-d935-4593-8157-c05846ea39b3",
                     "path": "Dpad",

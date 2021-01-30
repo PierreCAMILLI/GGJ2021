@@ -1,5 +1,5 @@
 
-enum Spell {
+public enum Spell {
     Fire,
     Ice,
     Wind
