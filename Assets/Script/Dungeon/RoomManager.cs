@@ -3,15 +3,20 @@ using UnityEngine;
 
 namespace Dungeon
 {
+    using UnityEngine.Events;
+
     public class RoomManager : SingletonBehaviour<RoomManager>
     {
         [SerializeField] private Room CurrentRoom;
 
-        [SerializeField] private List<Room> Rooms;
+        [SerializeField] private UnityEvent RoomChanged;
+
+
+        private readonly List<Room> _rooms = new List<Room>();
 
         private void Start()
         {
-            foreach (var room in Rooms)
+            foreach (var room in _rooms)
             {
                 room.gameObject.SetActive(false);
             }
@@ -24,6 +29,13 @@ namespace Dungeon
             CurrentRoom.gameObject.SetActive(false);
             room.gameObject.SetActive(true);
             CurrentRoom = room;
+
+            RoomChanged.Invoke();
+        }
+
+        public void RegisterRoom(Room room)
+        {
+            _rooms.Add(room);
         }
     }
 }
