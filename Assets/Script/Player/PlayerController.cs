@@ -156,7 +156,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("TakeDamage");
         PlayerInfos.Instance.Life -= amount;
         lifeChanged.Invoke(PlayerInfos.Instance.Life);
     }
