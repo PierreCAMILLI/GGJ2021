@@ -10,11 +10,21 @@ public class BlackScreen : SingletonBehaviour<BlackScreen>
 
     public float Alpha
     {
-        get { return m_blackScreen.color.a; }
+        get { return m_blackScreen.canvasRenderer.GetAlpha(); }
     }
 
     public void CrossFadeAlpha(float alpha, float duration, bool ignoreTimeScale)
     {
         m_blackScreen.CrossFadeAlpha(alpha, duration, ignoreTimeScale);
+    }
+
+    public void SetAlpha(float alpha)
+    {
+        m_blackScreen.canvasRenderer.SetAlpha(alpha);
+    }
+
+    private void Start()
+    {
+        SetAlpha(0f);
     }
 }

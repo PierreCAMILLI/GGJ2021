@@ -22,7 +22,7 @@ namespace Dungeon
         }
         */
 
-        public void OnAction(PlayerController player)
+        public void OnAction()
         {
             GlobalEvents.Instance.OnBlackScreenFadedEvent.AddListener(TeleportPlayer);
             GlobalEvents.Instance.EventTeleport.Invoke();

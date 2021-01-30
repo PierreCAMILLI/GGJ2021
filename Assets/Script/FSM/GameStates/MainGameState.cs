@@ -69,6 +69,7 @@ public class MainGameFSM : FSM<EMainGameState>
         this.AddState(new PauseState(this, EMainGameState.Pause));
         this.AddState(new GameOverState(this, EMainGameState.GameOver));
         this.AddState(new WinState(this, EMainGameState.Win));
+        this.AddState(new TeleportState(this, EMainGameState.TeleportTransition));
         this.RootState = EMainGameState.Explore;
     }
 }

@@ -116,7 +116,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
             foreach (ActionTrigger trigger in m_actionTriggers)
             {
-                trigger.OnActionInTriggerEvent(this);
+                trigger.OnActionInTriggerEvent();
                 Debug.Log("Interact");
                 GetComponent<SpriteRenderer>().sprite = characterSprite[2];
             }
