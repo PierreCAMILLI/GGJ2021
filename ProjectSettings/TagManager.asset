@@ -8,6 +8,7 @@ TagManager:
   - Fire
   - Wind
   - Ice
+  - Key
   layers:
   - Default
   - TransparentFX
