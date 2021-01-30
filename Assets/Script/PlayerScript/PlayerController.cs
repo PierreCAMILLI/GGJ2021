@@ -1,29 +1,21 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public float speed;
     public GameObject spell;
     public GameObject muzzleRight;
     public GameObject muzzleLeft;
     public float cooldown;
-    public static PlayerController instance;
     public bool isFacingRight = true;
     public float jumpForce;
-    public int selectedSpell;
     public float valueJump;
 
-    private string[] spells = { "Fire", "Ice", "Wind" };
     private Rigidbody2D rb;
     private float lastTimeUse;
     private float velocity;
     private bool canJump = true;
-
-    void Awake() {
-        instance = this;
-        selectedSpell = 0;
-    }
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -46,6 +38,7 @@ public class PlayerController : MonoBehaviour {
 
     //Cast a spell
     public void Fire(InputAction.CallbackContext context) {
+
         if (Time.time > lastTimeUse) {
             if (muzzleRight.active)
                 Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
@@ -57,28 +50,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void SwitchSpellRight(InputAction.CallbackContext context) {
-        if(context.ReadValue<float>() == 1) {
-            if(selectedSpell + 1 == spells.Length) {
-                selectedSpell = 0;
-            } else {
-                selectedSpell++;
-            }
-            Debug.Log("Spell: " + spells[selectedSpell]);
-        }
-        
+        if (context.ReadValue<float>() == 1) {
+            PlayerInfos.Instance.SelectNextSpell();
+        } 
     }
 
     public void SwitchSpellLeft(InputAction.CallbackContext context) {
-       if(context.ReadValue<float>() == 1) {
-            if (selectedSpell - 1  == -1) {
-                selectedSpell = spells.Length - 1;
-            }
-            else {
-                selectedSpell--;
-            }
-            Debug.Log("Spell : " + spells[selectedSpell]);
-        }
-        
+        if (context.ReadValue<float>() == 1) {
+            PlayerInfos.Instance.SelectPreviousSpell();
+        }  
     }
 
     //Jump

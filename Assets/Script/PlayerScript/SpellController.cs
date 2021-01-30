@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+public class SpellController : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
@@ -15,7 +15,7 @@ public class Spell : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         lifeTime = Time.time + lifeTime;
 
-        if (!PlayerController.instance.isFacingRight)
+        if (!PlayerController.Instance.isFacingRight)
             speed *= -1;
     }
 

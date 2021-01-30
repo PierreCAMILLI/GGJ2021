@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 
 public class PlayerInfos : SingletonBehaviour<PlayerInfos>
@@ -12,8 +9,8 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
     [SerializeField]
     private float m_timeToFillMagic = 1.0f;
 
-    //[SerializeField]
-    //private EMagicSpell[] Spells;
+    [SerializeField]
+    private Spell[] Spells = new Spell[] { Spell.Fire, Spell.Ice, Spell.Wind };
 
     private int m_life = 3;
     public int Life
@@ -37,18 +34,28 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
     }
 
     private int m_selectedSpellIndex = 0;
+
     //public Spell SelectedSpell { get { return this.Spells[m_selectedSpellIndex]; } }
     //public Spell NextSpell { get { return this.Spells[(m_selectedSpellIndex + 1) % Spells.Length]; } }
-    //public Spell NextSpell { get { return this.Spells[(m_selectedSpellIndex - 1) % Spells.Length]; } }
+    //public Spell PreviousSpell { get { return this.Spells[(m_selectedSpellIndex - 1) % Spells.Length]; } }
 
     public void SelectNextSpell()
     {
-        //m_selectedSpellIndex = (m_selectedSpellIndex + 1) % Spells.Length;
+        if (m_selectedSpellIndex == Spells.Length - 1)
+            m_selectedSpellIndex = 0;
+        else
+            m_selectedSpellIndex++;
+
     }
 
     public void SelectPreviousSpell()
     {
-        //m_selectedSpellIndex = (m_selectedSpellIndex - 1) % Spells.Length;
+        if (m_selectedSpellIndex == 0)
+            m_selectedSpellIndex = Spells.Length - 1;
+        else
+            m_selectedSpellIndex--;
+
+
     }
 
     protected override void Awake()
@@ -59,11 +66,6 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
         this.m_magic = 1.0f;
         this.m_keys = 0;
         this.m_selectedSpellIndex = 0;
-    }
-
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

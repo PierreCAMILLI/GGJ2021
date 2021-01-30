@@ -14,7 +14,7 @@ public class SmoothJump : MonoBehaviour {
         if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && PlayerController.instance.valueJump == 0) {
+        else if (rb.velocity.y > 0 && PlayerController.Instance.valueJump == 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (littlejumpMultiplier - 1) * Time.deltaTime;
         }
     }

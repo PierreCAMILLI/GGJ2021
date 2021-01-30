@@ -11,8 +11,8 @@ public class MuzzleRotate : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        if(PlayerController.instance.isFacingRight != changeSize) {
-            if (PlayerController.instance.isFacingRight) {
+        if(PlayerController.Instance.isFacingRight != changeSize) {
+            if (PlayerController.Instance.isFacingRight) {
                 muzzleRight.SetActive(true);
                 muzzleLeft.SetActive(false);
             }
@@ -21,7 +21,7 @@ public class MuzzleRotate : MonoBehaviour {
                 muzzleRight.SetActive(false);
             }
 
-            changeSize = PlayerController.instance.isFacingRight;
+            changeSize = PlayerController.Instance.isFacingRight;
         }
     }
 }
