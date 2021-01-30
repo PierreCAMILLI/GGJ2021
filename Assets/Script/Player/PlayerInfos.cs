@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 
-public class PlayerInfos : SingletonBehaviour<PlayerInfos>
-{
+public class PlayerInfos : SingletonBehaviour<PlayerInfos> {
     [SerializeField]
     private int m_lifeMax = 3;
     public int LifeMax { get { return m_lifeMax; } }
@@ -12,34 +8,28 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
     [SerializeField]
     private float m_timeToFillMagic = 1.0f;
 
-    //[SerializeField]
-    //private EMagicSpell[] Spells;
+    [SerializeField]
+    private Spell[] Spells = new Spell[] { Spell.Fire, Spell.Ice, Spell.Wind };
 
     private int m_life = 3;
-    public int Life
-    {
+    public int Life {
         get { return m_life; }
         set { m_life = Mathf.Clamp(value, 0, m_lifeMax); }
     }
 
     private float m_magic = 1.0f;
-    public float Magic
-    {
+    public float Magic {
         get { return m_magic; }
         set { m_magic = Mathf.Clamp01(value); }
     }
 
     private int m_keys = 0;
-    public int Keys
-    {
+    public int Keys {
         get { return m_keys; }
         set { m_keys = value; }
     }
 
     private int m_selectedSpellIndex = 0;
-    //public Spell SelectedSpell { get { return this.Spells[m_selectedSpellIndex]; } }
-    //public Spell NextSpell { get { return this.Spells[(m_selectedSpellIndex + 1) % Spells.Length]; } }
-    //public Spell NextSpell { get { return this.Spells[(m_selectedSpellIndex - 1) % Spells.Length]; } }
 
     private bool m_won;
     public bool Won
@@ -48,18 +38,40 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
         set { m_won = value; }
     }
 
-    public void SelectNextSpell()
-    {
-        //m_selectedSpellIndex = (m_selectedSpellIndex + 1) % Spells.Length;
+    public Spell SelectedSpell { get { return this.Spells[m_selectedSpellIndex]; } }
+    public int NextSpell { 
+        get {
+            if (m_selectedSpellIndex == Spells.Length - 1)
+                return 0;
+            else
+                return m_selectedSpellIndex + 1;
+        } 
+    }
+    public int PreviousSpell {
+        get {
+            if (m_selectedSpellIndex == 0)
+                return Spells.Length - 1;
+            else
+                return m_selectedSpellIndex - 1;
+        }
     }
 
-    public void SelectPreviousSpell()
-    {
-        //m_selectedSpellIndex = (m_selectedSpellIndex - 1) % Spells.Length;
+    public void SelectNextSpell() {
+        if (m_selectedSpellIndex == Spells.Length - 1)
+            m_selectedSpellIndex = 0;
+        else
+            m_selectedSpellIndex++;
+
     }
 
-    protected override void Awake()
-    {
+    public void SelectPreviousSpell() {
+        if (m_selectedSpellIndex == 0)
+            m_selectedSpellIndex = Spells.Length - 1;
+        else
+            m_selectedSpellIndex--;
+    }
+
+    protected override void Awake() {
         base.Awake();
         this.InitGame();
     }
@@ -71,11 +83,6 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
         this.m_keys = 0;
         this.m_selectedSpellIndex = 0;
         this.m_won = false;
-    }
-
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -90,8 +97,7 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
         {
             this.m_magic = 1f;
         }
-        else
-        {
+        else {
             this.Magic += Time.deltaTime / m_timeToFillMagic;
         }
     }
