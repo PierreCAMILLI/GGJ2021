@@ -103,6 +103,11 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
                     hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
                 }
             }
+            
+            if(hitColliders.Length == 0) {
+                LoseLife();
+            }
+
             manaBar.value -= 0;
             Instantiate(shockwaveAnimation, transform.position, transform.rotation);
         }
@@ -179,5 +184,16 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         {
             m_actionTriggers.Remove(trigger);
         }
+    }
+
+    public void LoseLife() {
+        PlayerInfos.Instance.Life--;
+        if (PlayerInfos.Instance.Life == 0) {
+            //Game Over
+        }
+    }
+
+    public void DestroyItem(GameObject gameObject) {
+        Destroy(gameObject);
     }
 }
