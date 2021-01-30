@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public enum EMainGameState
 {
-    //InitGame,             // State in order to initiate game
+    InitGame,             // State in order to initiate game
     Explore,
     Pause,
     Win,
@@ -31,7 +31,6 @@ public class MainGameState : FSMNode<EGameState>
     protected override void OnEnter()
     {
         Debug.Log(ToString() + ": OnEnter");
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         GlobalEvents.Instance.EventBackToMenu.AddListener(RequestBackToMenu);
         m_requestBackToMenu = false;
 
@@ -65,11 +64,12 @@ public class MainGameFSM : FSM<EMainGameState>
 {
     public override void CreateFSM()
     {
+        this.AddState(new InitGame(this, EMainGameState.InitGame));
         this.AddState(new ExploreState(this, EMainGameState.Explore));
         this.AddState(new PauseState(this, EMainGameState.Pause));
         this.AddState(new GameOverState(this, EMainGameState.GameOver));
         this.AddState(new WinState(this, EMainGameState.Win));
         this.AddState(new TeleportState(this, EMainGameState.TeleportTransition));
-        this.RootState = EMainGameState.Explore;
+        this.RootState = EMainGameState.InitGame;
     }
 }

@@ -16,6 +16,7 @@ public class ExploreState : FSMNode<EMainGameState>
         GlobalEvents.Instance.EventTeleport.AddListener(this.Teleport);
         m_pauseGame = false;
         m_teleport = false;
+        PlayerController.Instance.setInputIsActive(true);
     }
 
     protected override void Update()
@@ -50,6 +51,7 @@ public class ExploreState : FSMNode<EMainGameState>
         Debug.Log(ToString() + ": OnExit");
         GlobalEvents.Instance.EventPauseGame.RemoveListener(this.PauseGame);
         GlobalEvents.Instance.EventTeleport.RemoveListener(this.Teleport);
+        PlayerController.Instance.setInputIsActive(false);
     }
 
     private void PauseGame()
