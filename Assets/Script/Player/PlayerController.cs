@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class PlayerController : SingletonBehaviour<PlayerController> {
 
@@ -22,6 +23,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public float valueJump;
     public float manaCostSpell = 0.3f;
     public float manaCostShockwave = 1f;
+    public UnityEvent<int> lifeChanged = new UnityEvent<int>();
 
     private Rigidbody2D rb;
     private float lastTimeUse;
@@ -83,7 +85,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             inputIsActive = true;
         }
 
-        //Ne fonctionne pas (Crée un StackOverflow) donc j'ai mis un boolean un l'arrache pour éviter de perdre trop de temps
+        //Ne fonctionne pas (Crï¿½e un StackOverflow) donc j'ai mis un boolean un l'arrache pour ï¿½viter de perdre trop de temps
 
         /*if (GetComponent<PlayerInput>().inputIsActive)
             GetComponent<PlayerInput>().DeactivateInput();
@@ -150,6 +152,13 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             }
         }
         valueJump = context.ReadValue<float>();
+    }
+
+    public void TakeDamage(int amount)
+    {
+        Debug.Log("TakeDamage");
+        PlayerInfos.Instance.Life -= amount;
+        lifeChanged.Invoke(PlayerInfos.Instance.Life);
     }
 
     void FixedUpdate() {
