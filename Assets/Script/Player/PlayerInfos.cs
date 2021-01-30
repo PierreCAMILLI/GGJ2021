@@ -41,6 +41,13 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
     //public Spell NextSpell { get { return this.Spells[(m_selectedSpellIndex + 1) % Spells.Length]; } }
     //public Spell NextSpell { get { return this.Spells[(m_selectedSpellIndex - 1) % Spells.Length]; } }
 
+    private bool m_won;
+    public bool Won
+    {
+        get { return m_won; }
+        set { m_won = value; }
+    }
+
     public void SelectNextSpell()
     {
         //m_selectedSpellIndex = (m_selectedSpellIndex + 1) % Spells.Length;
@@ -54,11 +61,16 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
     protected override void Awake()
     {
         base.Awake();
+        this.InitGame();
+    }
 
+    public void InitGame()
+    {
         this.m_life = this.LifeMax;
         this.m_magic = 1.0f;
         this.m_keys = 0;
         this.m_selectedSpellIndex = 0;
+        this.m_won = false;
     }
 
     void Start()
@@ -69,12 +81,12 @@ public class PlayerInfos : SingletonBehaviour<PlayerInfos>
     // Update is called once per frame
     void Update()
     {
-        UpdateMagic();
+        this.UpdateMagic();
     }
 
     private void UpdateMagic()
     {
-        if (m_timeToFillMagic == 0f)
+        if (this.m_timeToFillMagic == 0f)
         {
             this.m_magic = 1f;
         }
