@@ -334,6 +334,17 @@
                 },
                 {
                     "name": "",
+                    "id": "db6717eb-9ab2-4cd4-9792-008788be077d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5a5006d6-a608-4dd3-8275-9dc87610a927",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
