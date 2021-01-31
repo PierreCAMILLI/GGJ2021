@@ -21,6 +21,7 @@ public class PickUpKey : MonoBehaviour
         if(collision.tag == "Player")
         {
             gameObject.SetActive(false);
+            PlayerInfos.Instance.Keys++;
         }
     }
 

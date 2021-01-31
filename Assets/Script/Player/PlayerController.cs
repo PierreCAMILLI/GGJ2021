@@ -59,19 +59,16 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void Fire(InputAction.CallbackContext context) {
         GameObject spellCast;
 
-        if (Time.time > lastTimeUse && inputIsActive) {
-            if (PlayerInfos.Instance.CanCast(1)) {
-                if (muzzleRight.active)
-                    spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
-                else
-                    spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+        if (PlayerInfos.Instance.CanCast(1)) {
+            if (muzzleRight.active)
+                spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
+            else
+                spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
 
-                spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
+            spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
 
-                manaBar.value -= 0;
+            manaBar.value -= 0;
 
-                lastTimeUse = Time.time + cooldown;
-            }
         }
     }
 
@@ -116,8 +113,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         }
     }
 
-    public void TakeDamage(int amount)
-    {
+    public void TakeDamage(int amount) {
         PlayerInfos.Instance.Life -= amount;
     }
 
