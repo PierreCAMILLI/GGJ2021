@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Audio;
+using UnityEngine.Events;
 
 public class PlayerController : SingletonBehaviour<PlayerController> {
 
@@ -75,7 +77,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void Pause(InputAction.CallbackContext context) {
         GlobalEvents.Instance.EventPauseGame.Invoke();
-        //Ne fonctionne pas (Crée un StackOverflow) donc j'ai mis un boolean un l'arrache pour éviter de perdre trop de temps
+        //Ne fonctionne pas (Crï¿½e un StackOverflow) donc j'ai mis un boolean un l'arrache pour ï¿½viter de perdre trop de temps
 
         /*if (GetComponent<PlayerInput>().inputIsActive)
             GetComponent<PlayerInput>().DeactivateInput();
@@ -88,21 +90,25 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Shockwave(InputAction.CallbackContext context) {
+        bool colliderFound = false;
+
         if (PlayerInfos.Instance.CanCast(1) && inputIsActive) {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
 
             foreach (var hitCollider in hitColliders) {
                 if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    colliderFound = true;
                 }
                 else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                     hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                    colliderFound = true;
                 }
             }
 
-            if (hitColliders.Length == 0) {
-                LoseLife();
+            if (!colliderFound) {
+                TakeDamage(1);
             }
 
             manaBar.value -= 0;
@@ -150,6 +156,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             if (context.ReadValue<float>() == 1) {
                 canJump = false;
                 rb.velocity = new Vector2(rb.position.x, jumpForce);
+                AudioManager.Instance.PlayJumpSound();
             }
         }
         valueJump = context.ReadValue<float>();
@@ -176,13 +183,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         ActionTrigger trigger = collision.gameObject.GetComponent<ActionTrigger>();
         if (trigger) {
             m_actionTriggers.Remove(trigger);
-        }
-    }
-
-    public void LoseLife() {
-        PlayerInfos.Instance.Life--;
-        if (PlayerInfos.Instance.Life == 0) {
-            //Game Over
         }
     }
 
