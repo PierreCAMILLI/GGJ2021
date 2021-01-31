@@ -18,7 +18,6 @@ public class ExploreState : FSMNode<EMainGameState>
         m_teleport = false;
         PlayerController.Instance.setInputIsActive(true);
         GameOverHUD.Instance.Show(false);
-        PauseHUD.Instance.Show(false);
         WinHUD.Instance.Show(false);
     }
 
