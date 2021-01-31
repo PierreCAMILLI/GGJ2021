@@ -20,9 +20,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Spikes
+  - Background
+  - Walls
   - 
   - 
   - 
@@ -47,6 +47,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 3116678363
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Walls
+    uniqueID: 1884179971
+    locked: 0
+  - name: Objects
+    uniqueID: 1836240055
+    locked: 0
+  - name: Player
+    uniqueID: 550143489
+    locked: 0
+  - name: Spikes
+    uniqueID: 3182357321
     locked: 0
