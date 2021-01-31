@@ -24,6 +24,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public float valueJump;
     public float manaCostSpell = 0.3f;
     public float manaCostShockwave = 1f;
+    public Animator Animator;
 
     private Rigidbody2D rb;
     private float lastTimeUse;
@@ -53,6 +54,8 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         }
         else
             velocity = 0;
+
+        Animator.SetFloat("Speed", Mathf.Abs(velocity));
     }
 
     //Cast a spell
@@ -60,16 +63,29 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         GameObject spellCast;
 
         if (inputIsActive) {
-            if (PlayerInfos.Instance.CanCast(1)) {
-                if (muzzleRight.active)
-                    spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
-                else
-                    spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+            if (muzzleRight.active)
+                spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+            else
+                spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
 
-                spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
+            Spell SelectedSpell = PlayerInfos.Instance.SelectedSpell;
 
-                manaBar.value -= 0;
+            spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int) SelectedSpell];
+
+            switch (SelectedSpell)
+            {
+                case Spell.Fire:
+                    Animator.SetTrigger("AttackFire");
+                    break;
+                case Spell.Ice:
+                    Animator.SetTrigger("AttackIce");
+                    break;
+                case Spell.Wind:
+                    Animator.SetTrigger("AttackWind");
+                    break;
             }
+
+            manaBar.value -= 0;
         }
     }
 
@@ -111,6 +127,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void TakeDamage(int amount) {
         PlayerInfos.Instance.Life -= amount;
+        Animator.SetTrigger("TakeDamage");
     }
 
     public void Interact(InputAction.CallbackContext context) {
@@ -151,6 +168,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void Jump(InputAction.CallbackContext context) {
         if (canJump && inputIsActive) {
+            Animator.SetBool("IsJumping", true);
             if (context.ReadValue<float>() == 1) {
                 canJump = false;
                 rb.velocity = new Vector2(rb.position.x, jumpForce);
@@ -165,7 +183,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-
+        Animator.SetBool("IsJumping", false);
         if (other.tag != "HiddenObject" && other.tag != "HiddenObjectCollider")
             canJump = true;
         else if (other.GetComponent<SpriteRenderer>().enabled)
