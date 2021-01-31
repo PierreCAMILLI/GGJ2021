@@ -46,6 +46,7 @@ public class TutoState : FSMNode<EGameState>
             Tuto.Instance.gameObject.SetActive(false);
         }
         GlobalEvents.Instance.EventStartGame.RemoveListener(StartGame);
+        Audio.AudioManager.Instance.StopMenuMusic();
         Debug.Log(ToString() + ": OnExit");
     }
 

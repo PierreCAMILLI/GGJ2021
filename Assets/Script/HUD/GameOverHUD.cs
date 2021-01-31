@@ -8,4 +8,9 @@ public class GameOverHUD : SingletonBehaviour<GameOverHUD>
     {
         this.gameObject.SetActive(toggle);
     }
+
+    public void BackToMenu()
+    {
+        GlobalEvents.Instance.EventSafeBackToMenu.Invoke();
+    }
 }

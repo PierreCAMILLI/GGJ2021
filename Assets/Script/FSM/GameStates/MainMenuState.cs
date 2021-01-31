@@ -23,16 +23,17 @@ public class MainMenuState : FSMNode<EGameState>
         {
             SceneManager.LoadScene("TitleScreen", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
-        if (TitleScreen.Instance)
-        {
-            TitleScreen.Instance.gameObject.SetActive(true);
-        }
         GlobalEvents.Instance.EventStartTuto.AddListener(StartTuto);
+        Audio.AudioManager.Instance.PlayMenuMusic();
         m_startTuto = false;
     }
 
     protected override void Update()
     {
+        if (TitleScreen.Instance)
+        {
+            TitleScreen.Instance.gameObject.SetActive(true);
+        }
         if (m_startTuto)
         {
             ChangeState(EGameState.Tuto);

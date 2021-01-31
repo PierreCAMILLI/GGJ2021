@@ -122,12 +122,19 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Interact(InputAction.CallbackContext context) {
-        if (inputIsActive && context.ReadValue<float>() == 1) {
-            Debug.Log("Interact");
-            GetComponent<SpriteRenderer>().sprite = characterSprite[2];
+        if (context.started)
+        {
+            GlobalEvents.Instance.EventSafeBackToMenu.Invoke();
 
-            foreach (ActionTrigger trigger in m_actionTriggers) {
-                trigger.OnActionInTriggerEvent();
+            if (inputIsActive)
+            {
+                Debug.Log("Interact");
+                GetComponent<SpriteRenderer>().sprite = characterSprite[2];
+
+                foreach (ActionTrigger trigger in m_actionTriggers)
+                {
+                    trigger.OnActionInTriggerEvent();
+                }
             }
         }
     }

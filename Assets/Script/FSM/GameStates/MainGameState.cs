@@ -32,8 +32,9 @@ public class MainGameState : FSMNode<EGameState>
     {
         Debug.Log(ToString() + ": OnEnter");
         GlobalEvents.Instance.EventBackToMenu.AddListener(RequestBackToMenu);
+        Audio.AudioManager.Instance.PlayGameMusic();
         m_requestBackToMenu = false;
-
+        
         this.MainGameFSM.Enter();
     }
 
@@ -51,6 +52,7 @@ public class MainGameState : FSMNode<EGameState>
         this.MainGameFSM.Exit();
 
         Debug.Log(ToString() + ": OnExit");
+        Audio.AudioManager.Instance.StopGameMusic();
         GlobalEvents.Instance.EventBackToMenu.RemoveListener(RequestBackToMenu);
     }
 
