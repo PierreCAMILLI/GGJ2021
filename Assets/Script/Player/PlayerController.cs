@@ -128,6 +128,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void TakeDamage(int amount) {
         PlayerInfos.Instance.Life -= amount;
         Animator.SetTrigger("TakeDamage");
+        AudioManager.Instance.PlayDamageSound();
     }
 
     public void Interact(InputAction.CallbackContext context) {

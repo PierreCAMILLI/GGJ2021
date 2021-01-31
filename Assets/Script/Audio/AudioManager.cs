@@ -10,6 +10,8 @@ namespace Audio
 
         [SerializeField] private AudioSource JumpSound;
 
+        [SerializeField] private AudioSource DamageSound;
+
         public void PlayMenuMusic()
         {
             MenuMusic.Play();
@@ -33,6 +35,11 @@ namespace Audio
         public void PlayJumpSound()
         {
             JumpSound.Play();
+        }
+
+        public void PlayDamageSound()
+        {
+            DamageSound.Play();
         }
     }
 }
