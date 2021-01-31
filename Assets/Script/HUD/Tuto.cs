@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Tuto : SingletonBehaviour<Tuto>
 {
@@ -8,6 +10,13 @@ public class Tuto : SingletonBehaviour<Tuto>
     private RectTransform[] m_tutoScreens;
 
     private int m_screenIndex;
+
+    void Start() {
+        foreach(Transform child in transform) {
+            if(child.GetComponent<Button>() != null)
+                EventSystem.current.SetSelectedGameObject(child.gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void OnEnable()
