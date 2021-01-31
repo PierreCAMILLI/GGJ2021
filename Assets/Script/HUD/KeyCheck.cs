@@ -9,11 +9,14 @@ public class KeyCheck : MonoBehaviour
 
     [SerializeField] private Sprite keySprite;
 
+    [SerializeField] private Sprite emptySlot;
+
     // Update is called once per frame
     void Update()
     {
-        if (PlayerInfos.Instance.Keys > KeyAmount - 1) {
+        if (PlayerInfos.Instance.Keys > KeyAmount - 1) 
             gameObject.GetComponent<Image>().sprite = keySprite;
-        }
+         else
+            gameObject.GetComponent<Image>().sprite = emptySlot;
     }
 }
