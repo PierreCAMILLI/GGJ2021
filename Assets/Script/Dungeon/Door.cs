@@ -30,10 +30,12 @@ namespace Dungeon
                 if (PlayerInfos.Instance.Keys > 0) {
                     GlobalEvents.Instance.OnBlackScreenFadedEvent.AddListener(TeleportPlayer);
                     GlobalEvents.Instance.EventTeleport.Invoke();
+                    PlayerInfos.Instance.Keys--;
                 }
             } else {
                 GlobalEvents.Instance.OnBlackScreenFadedEvent.AddListener(TeleportPlayer);
                 GlobalEvents.Instance.EventTeleport.Invoke();
+                PlayerInfos.Instance.Keys--;
             }
         }
 
