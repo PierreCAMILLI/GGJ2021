@@ -90,21 +90,25 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Shockwave(InputAction.CallbackContext context) {
+        bool colliderFound = false;
+
         if (PlayerInfos.Instance.CanCast(1) && inputIsActive) {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
 
             foreach (var hitCollider in hitColliders) {
                 if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    colliderFound = true;
                 }
                 else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
                     hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                     hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                    colliderFound = true;
                 }
             }
 
-            if (hitColliders.Length == 0) {
-                LoseLife();
+            if (!colliderFound) {
+                TakeDamage(1);
             }
 
             manaBar.value -= 0;
@@ -179,13 +183,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         ActionTrigger trigger = collision.gameObject.GetComponent<ActionTrigger>();
         if (trigger) {
             m_actionTriggers.Remove(trigger);
-        }
-    }
-
-    public void LoseLife() {
-        PlayerInfos.Instance.Life--;
-        if (PlayerInfos.Instance.Life == 0) {
-            //Game Over
         }
     }
 
