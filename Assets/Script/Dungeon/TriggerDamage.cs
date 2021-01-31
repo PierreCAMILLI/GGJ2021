@@ -4,7 +4,7 @@ namespace Dungeon
 {
     public class TriggerDamage : MonoBehaviour
     {
-        [SerializeField] private int Damage;
+        [SerializeField] private int Damage = 1;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
