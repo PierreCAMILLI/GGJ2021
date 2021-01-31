@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718491575043626383}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.2, y: -0.5, z: 0}
+  m_LocalPosition: {x: 1.28, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5674641738307133776}
@@ -187,3 +187,4 @@ MonoBehaviour:
   Room: {fileID: 0}
   NextRoomDoor: {fileID: 0}
   In: {fileID: 718491575043626383}
+  keyRequired: 0
