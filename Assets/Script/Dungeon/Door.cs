@@ -10,6 +10,8 @@ namespace Dungeon
         [SerializeField] private Door NextRoomDoor;
 
         [SerializeField] private GameObject In;
+        
+        [SerializeField] private bool keyRequired;
 
         /*
         private void OnTriggerEnter2D(Collider2D other)
@@ -24,8 +26,15 @@ namespace Dungeon
 
         public void OnAction()
         {
-            GlobalEvents.Instance.OnBlackScreenFadedEvent.AddListener(TeleportPlayer);
-            GlobalEvents.Instance.EventTeleport.Invoke();
+            if (keyRequired) {
+                if (PlayerInfos.Instance.Keys > 0) {
+                    GlobalEvents.Instance.OnBlackScreenFadedEvent.AddListener(TeleportPlayer);
+                    GlobalEvents.Instance.EventTeleport.Invoke();
+                }
+            } else {
+                GlobalEvents.Instance.OnBlackScreenFadedEvent.AddListener(TeleportPlayer);
+                GlobalEvents.Instance.EventTeleport.Invoke();
+            }
         }
 
         private void TeleportPlayer()
