@@ -17,6 +17,8 @@ public class ExploreState : FSMNode<EMainGameState>
         m_pauseGame = false;
         m_teleport = false;
         PlayerController.Instance.setInputIsActive(true);
+        GameOverHUD.Instance.Show(false);
+        WinHUD.Instance.Show(false);
     }
 
     protected override void Update()

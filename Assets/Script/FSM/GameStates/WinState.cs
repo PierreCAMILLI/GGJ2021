@@ -11,7 +11,16 @@ public class WinState : FSMNode<EMainGameState>
     protected override void OnEnter()
     {
         GlobalEvents.Instance.EventSafeBackToMenu.AddListener(BackToMenu);
+        WinHUD.Instance.Show(true);
         m_backToMenu = false;
+    }
+
+    protected override void Update()
+    {
+        if (m_backToMenu)
+        {
+            GlobalEvents.Instance.EventBackToMenu.Invoke();
+        }
     }
 
     protected override void OnExit()
