@@ -30,8 +30,13 @@ namespace Dungeon
 
         private void TeleportPlayer()
         {
-            PlayerController.Instance.transform.position = NextRoomDoor.In.transform.position;
-            Room.RoomManager.ChangeRoom(NextRoomDoor.Room);
+            if (NextRoomDoor && NextRoomDoor.In && Room.RoomManager && NextRoomDoor.Room)
+            {
+                PlayerController.Instance.transform.position = NextRoomDoor.In.transform.position;
+                Room.RoomManager.ChangeRoom(NextRoomDoor.Room);
+                return;
+            }
+            Debug.LogWarning("Door not assigned!");
         }
     }
 }
