@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Audio;
+using UnityEngine.Events;
 
 public class PlayerController : SingletonBehaviour<PlayerController> {
 
@@ -75,7 +77,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
 
     public void Pause(InputAction.CallbackContext context) {
         GlobalEvents.Instance.EventPauseGame.Invoke();
-        //Ne fonctionne pas (Crée un StackOverflow) donc j'ai mis un boolean un l'arrache pour éviter de perdre trop de temps
+        //Ne fonctionne pas (Crï¿½e un StackOverflow) donc j'ai mis un boolean un l'arrache pour ï¿½viter de perdre trop de temps
 
         /*if (GetComponent<PlayerInput>().inputIsActive)
             GetComponent<PlayerInput>().DeactivateInput();
@@ -150,6 +152,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
             if (context.ReadValue<float>() == 1) {
                 canJump = false;
                 rb.velocity = new Vector2(rb.position.x, jumpForce);
+                AudioManager.Instance.PlayJumpSound();
             }
         }
         valueJump = context.ReadValue<float>();
