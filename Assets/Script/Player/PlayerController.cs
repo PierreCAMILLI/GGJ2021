@@ -59,27 +59,22 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void Fire(InputAction.CallbackContext context) {
         GameObject spellCast;
 
-        if (PlayerInfos.Instance.CanCast(1)) {
-            if (muzzleRight.active)
-                spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
-            else
-                spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
+        if (inputIsActive) {
+            if (PlayerInfos.Instance.CanCast(1)) {
+                if (muzzleRight.active)
+                    spellCast = (GameObject)Instantiate(spell, muzzleRight.transform.position, muzzleRight.transform.rotation);
+                else
+                    spellCast = (GameObject)Instantiate(spell, muzzleLeft.transform.position, muzzleLeft.transform.rotation);
 
-            spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
+                spellCast.GetComponent<SpriteRenderer>().sprite = spriteSpell[(int)PlayerInfos.Instance.SelectedSpell];
 
-            manaBar.value -= 0;
-
+                manaBar.value -= 0;
+            }
         }
     }
 
     public void Pause(InputAction.CallbackContext context) {
         GlobalEvents.Instance.EventPauseGame.Invoke();
-        //Ne fonctionne pas (Cr�e un StackOverflow) donc j'ai mis un boolean un l'arrache pour �viter de perdre trop de temps
-
-        /*if (GetComponent<PlayerInput>().inputIsActive)
-            GetComponent<PlayerInput>().DeactivateInput();
-        else
-            GetComponent<PlayerInput>().ActivateInput();*/
     }
 
     public void setInputIsActive(bool value) {
@@ -89,27 +84,28 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     public void Shockwave(InputAction.CallbackContext context) {
         bool colliderFound = false;
 
-        if (PlayerInfos.Instance.CanCast(1) && inputIsActive) {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
+        if (inputIsActive) {
+            if (PlayerInfos.Instance.CanCast(1)) {
+                Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 5f);
 
-            foreach (var hitCollider in hitColliders) {
-                if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
-                    hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                    colliderFound = true;
+                foreach (var hitCollider in hitColliders) {
+                    if (hitCollider.gameObject.tag.Equals("HiddenObject")) {
+                        hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                        colliderFound = true;
+                    }
+                    else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
+                        hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                        hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                        colliderFound = true;
+                    }
                 }
-                else if (hitCollider.gameObject.tag.Equals("HiddenObjectCollider")) {
-                    hitCollider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                    hitCollider.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
-                    colliderFound = true;
+
+                if (!colliderFound) {
+                    TakeDamage(1);
                 }
-            }
 
-            if (!colliderFound) {
-                TakeDamage(1);
+                Instantiate(shockwaveAnimation, transform.position, transform.rotation);
             }
-
-            manaBar.value -= 0;
-            Instantiate(shockwaveAnimation, transform.position, transform.rotation);
         }
     }
 
@@ -153,7 +149,6 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
         }
     }
 
-    //Jump
     public void Jump(InputAction.CallbackContext context) {
         if (canJump && inputIsActive) {
             if (context.ReadValue<float>() == 1) {
