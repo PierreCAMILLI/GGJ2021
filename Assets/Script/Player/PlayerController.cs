@@ -122,7 +122,7 @@ public class PlayerController : SingletonBehaviour<PlayerController> {
     }
 
     public void Interact(InputAction.CallbackContext context) {
-        if (inputIsActive) {
+        if (inputIsActive && context.ReadValue<float>() == 1) {
             Debug.Log("Interact");
             GetComponent<SpriteRenderer>().sprite = characterSprite[2];
 
